@@ -10,13 +10,18 @@ import {
 import Layout from '@/components/Layout/Layout';
 import InfoCard from '@/components/InfoCard/InfoCard';
 import client from '@/utilities/ApolloClientConnection/ApolloClientConnection';
+import TopInfoSection from '@/components/TopInfoSection/TopInfoSection';
 
 interface IPROPS {
-  pinnedItems: [];
+  data: {
+    pinnedItems: {};
+    repositories: {};
+    watching: {};
+  };
 }
 
-const Home: React.FC<IPROPS> = ({ pinnedItems }) => {
-  console.log(pinnedItems);
+const Home: React.FC<IPROPS> = ({ data }) => {
+  console.log(data);
   return (
     <>
       <Head>
@@ -27,11 +32,7 @@ const Home: React.FC<IPROPS> = ({ pinnedItems }) => {
       </Head>
       <Layout>
         <main>
-          <div className="grid grid-cols-4 gap-5 px-5 py-10">
-            <InfoCard />
-            <InfoCard />
-            <InfoCard />
-          </div>
+          <TopInfoSection data={data} />
         </main>
       </Layout>
     </>
@@ -43,17 +44,15 @@ export async function getStaticProps() {
     query: gql`
       {
         user(login: "tausifabid12") {
-          pinnedItems(first: 6) {
+          pinnedItems {
             totalCount
-            edges {
-              node {
-                ... on Repository {
-                  id
-                  name
-                  url
-                }
-              }
-            }
+          }
+          repositories {
+            totalCount
+            totalDiskUsage
+          }
+          watching {
+            totalCount
           }
         }
       }
@@ -61,13 +60,9 @@ export async function getStaticProps() {
   });
 
   const { user } = data;
-  const pinnedItems = user?.pinnedItems?.edges.map(
-    (node: { __typename: string; id: string; name: string; url: string }) =>
-      node
-  );
-
+  console.log(user);
   return {
-    props: { pinnedItems }, // will be passed to the page component as props
+    props: { data: user }, // will be passed to the page component as props
   };
 }
 
