@@ -1,15 +1,22 @@
 import Head from 'next/head';
-import { gql } from '@apollo/client';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+  gql,
+} from '@apollo/client';
 
 import Layout from '@/components/Layout/Layout';
-
+import InfoCard from '@/components/InfoCard/InfoCard';
 import client from '@/utilities/ApolloClientConnection/ApolloClientConnection';
 
 interface IPROPS {
-  data: {};
+  pinnedItems: [];
 }
 
-const Home: React.FC<IPROPS> = ({ data }) => {
+const Home: React.FC<IPROPS> = ({ pinnedItems }) => {
+  console.log(pinnedItems);
   return (
     <>
       <Head>
@@ -20,7 +27,11 @@ const Home: React.FC<IPROPS> = ({ data }) => {
       </Head>
       <Layout>
         <main>
-          <h2>helooo</h2>
+          <div className="grid grid-cols-4 gap-5 px-5 py-10">
+            <InfoCard />
+            <InfoCard />
+            <InfoCard />
+          </div>
         </main>
       </Layout>
     </>
@@ -32,25 +43,31 @@ export async function getStaticProps() {
     query: gql`
       {
         user(login: "tausifabid12") {
-          pinnedItems {
+          pinnedItems(first: 6) {
             totalCount
-          }
-          repositories {
-            totalCount
-          }
-          watching {
-            totalCount
-            totalDiskUsage
+            edges {
+              node {
+                ... on Repository {
+                  id
+                  name
+                  url
+                }
+              }
+            }
           }
         }
       }
     `,
   });
 
-  console.log(data);
+  const { user } = data;
+  const pinnedItems = user?.pinnedItems?.edges.map(
+    (node: { __typename: string; id: string; name: string; url: string }) =>
+      node
+  );
 
   return {
-    props: { data: data.user },
+    props: { pinnedItems }, // will be passed to the page component as props
   };
 }
 

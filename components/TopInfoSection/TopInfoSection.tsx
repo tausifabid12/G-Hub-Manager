@@ -1,31 +1,30 @@
-import client from '@/utilities/ApolloClientConnection/ApolloClientConnection';
 import React from 'react';
 import { BsPinFill, BsThreeDotsVertical, BsStack } from 'react-icons/bs';
 import InfoCard from '../InfoCard/InfoCard';
 
 interface INFOPROPS {
   data: {
-    pinnedItems: { totalCount: number };
+    pinnedItems: {};
     repositories: {};
     watching: {};
   };
 }
 
 const TopInfoSection: React.FC<INFOPROPS> = ({ data }) => {
-  console.log(data?.pinnedItems.totalCount);
+  // console.log(data?.watching.totalCount);
 
   const cardInfo = [
     {
       id: 1,
       name: 'Pinned Repo',
       icon: <BsPinFill />,
-      value: 4,
+      value: data?.pinnedItems.totalCount,
     },
     {
       id: 2,
       name: 'Pinned Repo',
       icon: <BsPinFill />,
-      value: 4,
+      // value: data?.repositories.totalCount,
     },
     {
       id: 3,
