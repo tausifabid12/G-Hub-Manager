@@ -2,7 +2,7 @@ import client from '@/utilities/ApolloClientConnection/ApolloClientConnection';
 import { useQuery, gql } from '@apollo/client';
 import Link from 'next/link';
 import React from 'react';
-import SideBarProfile from '../SideBarProfile/SideBarProfile';
+import { BsGithub } from 'react-icons/bs';
 
 interface LPROPS {
   children: JSX.Element[] | JSX.Element;
@@ -51,6 +51,18 @@ const Layout: React.FC<LPROPS> = ({ children }) => {
         <ul className="menu p-1 w-64 bg-secondary text-white shadow-lg ">
           {/* <!-- Sidebar content here --> */}
           <li>{/* <SideBarProfile data={data?.user} /> */}</li>
+          <li className="text-lg lg:text-2xl mb-10 font-bold uppercase">
+            <Link href="/">
+              <p className="text-5xl text-primary mx-auto ">
+                <BsGithub />
+              </p>
+            </Link>
+            <Link href="/">
+              <p>
+                G-Hub <span className="text-primary"> Manager</span>
+              </p>
+            </Link>
+          </li>
           <li>
             <Link href="/">Home</Link>
           </li>

@@ -5,6 +5,8 @@ import Layout from '@/components/Layout/Layout';
 import InfoCard from '@/components/InfoCard/InfoCard';
 import client from '@/utilities/ApolloClientConnection/ApolloClientConnection';
 import TopInfoSection from '@/components/TopInfoSection/TopInfoSection';
+import Profile from '@/components/SideBarProfile/Profile';
+import PinnedRepo from '@/components/PinnedRepos/PinnedRepo';
 
 interface IPROPS {
   data: {
@@ -18,6 +20,10 @@ interface IPROPS {
     watching: {
       totalCount: number;
     };
+
+    avatarUrl: string;
+    login: string;
+    name: string;
   };
 }
 
@@ -32,7 +38,9 @@ const Home: React.FC<IPROPS> = ({ data }) => {
       </Head>
       <Layout>
         <main>
+          <Profile data={data} />
           <TopInfoSection data={data} />
+          <PinnedRepo />
         </main>
       </Layout>
     </>
@@ -65,7 +73,7 @@ export async function getStaticProps() {
   const { user } = data;
 
   return {
-    props: { data: user }, // will be passed to the page component as props
+    props: { data: user },
   };
 }
 
