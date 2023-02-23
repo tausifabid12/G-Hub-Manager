@@ -10,9 +10,16 @@ import InfoCard from '../InfoCard/InfoCard';
 
 interface INFOPROPS {
   data: {
-    pinnedItems: { totalCount: number };
-    repositories: { totalCount: number; totalDiskUsage: number };
-    watching: { totalCount: number };
+    pinnedItems: {
+      totalCount: number;
+    };
+    repositories: {
+      totalCount: number;
+      totalDiskUsage: number;
+    };
+    watching: {
+      totalCount: number;
+    };
   };
 }
 

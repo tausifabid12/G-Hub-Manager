@@ -1,11 +1,5 @@
 import Head from 'next/head';
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-  gql,
-} from '@apollo/client';
+import { gql } from '@apollo/client';
 
 import Layout from '@/components/Layout/Layout';
 import InfoCard from '@/components/InfoCard/InfoCard';
@@ -14,14 +8,20 @@ import TopInfoSection from '@/components/TopInfoSection/TopInfoSection';
 
 interface IPROPS {
   data: {
-    pinnedItems: {};
-    repositories: {};
-    watching: {};
+    pinnedItems: {
+      totalCount: number;
+    };
+    repositories: {
+      totalCount: number;
+      totalDiskUsage: number;
+    };
+    watching: {
+      totalCount: number;
+    };
   };
 }
 
 const Home: React.FC<IPROPS> = ({ data }) => {
-  console.log(data);
   return (
     <>
       <Head>
@@ -54,13 +54,16 @@ export async function getStaticProps() {
           watching {
             totalCount
           }
+          avatarUrl(size: 500)
+          login
+          name
         }
       }
     `,
   });
 
   const { user } = data;
-  console.log(user);
+
   return {
     props: { data: user }, // will be passed to the page component as props
   };

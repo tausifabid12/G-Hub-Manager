@@ -10,8 +10,6 @@ interface INFOPROPS {
 }
 
 const InfoCard: React.FC<INFOPROPS> = ({ cardData }) => {
-  console.log(cardData);
-
   return (
     <div className="shadow-lg border-t-4 border-secondary  space-y-4 w-full rounded-lg p-4">
       <div className="bg-secondary flex items-center justify-between text-white font-bold rounded-md p-2 text-xl">
