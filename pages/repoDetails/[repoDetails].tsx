@@ -56,7 +56,7 @@ const RepoDetails: React.FC = () => {
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative w-full">
             <div className="mt-1 sm:flex sm:items-center sm:gap-2">
               <div className="flex items-center gap-1 text-gray-500">
                 <svg
@@ -98,18 +98,20 @@ const RepoDetails: React.FC = () => {
               Clone This Repo: {sshUrl}
             </p>
             <div className="space-x-12 mt-8">
-              <Link
+              <a
                 href={url}
                 className="mt-1 text-md font-semibold text-primary hover:underline"
               >
                 Code Link
-              </Link>
-              <Link
-                href={homepageUrl}
-                className="mt-1 text-md font-semibold text-primary hover:underline"
-              >
-                live Link
-              </Link>
+              </a>
+              {homepageUrl && (
+                <a
+                  href={homepageUrl}
+                  className="mt-1 text-md font-semibold text-primary hover:underline"
+                >
+                  live Link
+                </a>
+              )}
             </div>
           </div>
         </div>

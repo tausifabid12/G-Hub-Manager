@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app';
 import { ApolloProvider } from '@apollo/client';
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { Toaster } from 'react-hot-toast';
 
 const httpLink = createHttpLink({
   uri: 'https://api.github.com/graphql',
@@ -27,6 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
       <Component {...pageProps} />
+      <Toaster position="top-center" reverseOrder={false} />
     </ApolloProvider>
   );
 }

@@ -6,7 +6,7 @@ import { BsCodeSlash } from 'react-icons/bs';
 interface IPROPS {
   data: {
     id: string;
-    url: string;
+    url?: string;
     name: string;
     homepageUrl?: string;
     description?: string;
@@ -20,7 +20,7 @@ const PinnedRepoCard: React.FC<IPROPS> = ({ data, profileData }) => {
   return (
     <div className="max-w-2xl px-8 py-4 bg-white border-t-4 border-secondary rounded-lg shadow-lg dark:bg-gray-800">
       <div className="flex items-center justify-between">
-        <span className="text-sm font-light text-gray-600 font-semibold dark:text-gray-400">
+        <span className="text-sm  text-gray-600 font-semibold dark:text-gray-400">
           {createdAt.slice(0, 10)}
         </span>
         <a
@@ -35,13 +35,13 @@ const PinnedRepoCard: React.FC<IPROPS> = ({ data, profileData }) => {
       </div>
 
       <div className="mt-2">
-        <a
-          href="#"
-          className="text-xl font-bold text-secondary dark:text-white hover:text-secondary dark:hover:text-gray-200 hover:underline "
+        <Link
+          href={`/repoDetails/${name}`}
+          className="text-lg lg:text-xl font-bold text-secondary dark:text-white hover:text-secondary dark:hover:text-gray-200 hover:underline "
           role="link"
         >
           <p className="capitalize">{name}</p>
-        </a>
+        </Link>
         <p className="mt-2 text-md text-gray-700 font-semibold dark:text-gray-300 truncate">
           {description
             ? description
@@ -49,7 +49,7 @@ const PinnedRepoCard: React.FC<IPROPS> = ({ data, profileData }) => {
         </p>
       </div>
 
-      <div className="flex items-center justify-between mt-4">
+      <div className="flex items-center justify-between mt-7">
         <Link
           href={`/repoDetails/${name}`}
           className="text-primary font-semibold hover:underline"
@@ -66,12 +66,12 @@ const PinnedRepoCard: React.FC<IPROPS> = ({ data, profileData }) => {
             src={profileData?.avatarUrl}
             alt="avatar"
           />
-          <a
+          <p
             className="font-bold text-gray-700 cursor-pointer dark:text-gray-200"
             role="link"
           >
             {profileData?.name}
-          </a>
+          </p>
         </div>
       </div>
     </div>

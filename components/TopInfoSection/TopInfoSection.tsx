@@ -41,7 +41,7 @@ const TopInfoSection: React.FC<INFOPROPS> = ({ data }) => {
       id: 3,
       name: 'Disk Usage',
       icon: <BsEjectFill />,
-      value: `${Math.round(data?.repositories.totalDiskUsage / 1000)}`,
+      value: `${Math.round(data?.repositories.totalDiskUsage / 1000)} `,
     },
     {
       id: 4,
@@ -51,7 +51,7 @@ const TopInfoSection: React.FC<INFOPROPS> = ({ data }) => {
     },
   ];
   return (
-    <section className="grid grid-cols-4 gap-5 px-5 py-10">
+    <section className="grid grid-cols-2 lg:grid-cols-4 gap-5 px-5 py-10">
       {cardInfo.map((card) => (
         <InfoCard key={card.id} cardData={card} />
       ))}

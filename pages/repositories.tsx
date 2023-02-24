@@ -1,4 +1,5 @@
 import Layout from '@/components/Layout/Layout';
+import PinnedRepoCard from '@/components/PinnedRepoCard/PinnedRepoCard';
 import RepositoriesCard from '@/components/RepositoriesCard/RepositoriesCard';
 import client from '@/utilities/ApolloClientConnection/ApolloClientConnection';
 import { gql } from '@apollo/client';
@@ -20,20 +21,28 @@ interface RPOPROPS {
 const Repositories: React.FC<RPOPROPS> = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [size, setSize] = useState(8);
-  console.log(data);
 
-  const pages = Math.ceil(data?.length / size);
+  const repos = data?.user?.repositories?.edges;
+
+  const pages = Math.ceil(repos?.length / size);
 
   const lastPageIndex = currentPage * size;
   const firstPageIndex = lastPageIndex - size;
 
-  const pagedData = data?.slice(firstPageIndex, lastPageIndex);
+  const pagedData = repos?.slice(firstPageIndex, lastPageIndex);
+
+  const profileData = {
+    name: data?.user?.login,
+    avatarUrl: data?.user?.avatarUrl,
+  };
 
   return (
     <Layout>
-      <section className="px-12 py-8 space-y-10">
+      <section className="px-8 py-8 space-y-10">
         <div className="flex items-center justify-between">
-          <h1 className="text-5xl text-secondary font-bold">Repositories</h1>
+          <h1 className="text-xl lg:text-5xl text-secondary font-bold">
+            Repositories
+          </h1>
           <div className="flex items-center justify-center space-x-3">
             <p className="font-semibold text-lg">View :</p>
             <div className="form-control ">
@@ -50,9 +59,13 @@ const Repositories: React.FC<RPOPROPS> = ({ data }) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           {pagedData?.map((repo) => (
-            <RepositoriesCard key={repo?.node.name} data={repo.node} />
+            <PinnedRepoCard
+              key={repo.node.id}
+              data={repo.node}
+              profileData={profileData}
+            />
           ))}
         </div>
         <div className=" flex justify-center pb-9">
@@ -83,13 +96,18 @@ export async function getStaticProps() {
           ) {
             edges {
               node {
+                id
                 name
-                url
+                createdAt
                 description
                 homepageUrl
+                url
               }
             }
           }
+          login
+          name
+          avatarUrl(size: 500)
         }
       }
     `,
@@ -98,7 +116,7 @@ export async function getStaticProps() {
   console.log(data?.user?.repositories?.edges);
 
   return {
-    props: { data: data.user.repositories.edges },
+    props: { data: data },
   };
 }
 

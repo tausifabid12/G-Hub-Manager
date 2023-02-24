@@ -38,7 +38,6 @@ const Home: React.FC<IPROPS> = ({ data }) => {
       </Head>
       <Layout>
         <main>
-          <Profile data={data} />
           <TopInfoSection data={data} />
           <PinnedRepo />
         </main>
