@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import { isConstValueNode } from 'graphql';
 import React from 'react';
+import Loading from '../Loading/Loading';
 import PinnedRepoCard from '../PinnedRepoCard/PinnedRepoCard';
 
 const GET_REPOINFO = gql`
@@ -32,6 +33,10 @@ const PinnedRepo: React.FC = () => {
 
   if (error) {
     console.log(error);
+  }
+
+  if (loading) {
+    return <Loading />;
   }
 
   const profileData = {

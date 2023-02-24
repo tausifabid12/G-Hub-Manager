@@ -4,6 +4,7 @@ import Layout from '@/components/Layout/Layout';
 import { BsFillPencilFill } from 'react-icons/bs';
 import UpDateStatus from '@/components/UpDateStatus/UpDateStatus';
 import CreateRepo from '@/components/CreateRepo/CreateRepo';
+import Loading from '@/components/Loading/Loading';
 
 const GET_PROFILEINFO = gql`
   query getProfileINfo {
@@ -19,7 +20,9 @@ const Mutation = () => {
   const { loading: statusLoading, data: statusData } =
     useQuery(GET_PROFILEINFO);
 
-  console.log(statusData, 'kkkk');
+  if (statusLoading) {
+    return <Loading />;
+  }
   return (
     <Layout>
       <div className="grid grid-cols-1 lg:grid-cols-2">

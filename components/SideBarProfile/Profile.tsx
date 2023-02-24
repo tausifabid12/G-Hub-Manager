@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { BsFillXCircleFill } from 'react-icons/bs';
 import PinnedRepoCard from '../PinnedRepoCard/PinnedRepoCard';
 import Link from 'next/link';
+import Loading from '../Loading/Loading';
 
 const GET_PROFILEINFO = gql`
   query getProfileINfo {
@@ -42,9 +43,9 @@ const Profile: React.FC = () => {
     console.log(error);
   }
 
-  if (loading) {
-    return <p>loading</p>;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
 
   const profileData = {
     name: data?.user?.login,

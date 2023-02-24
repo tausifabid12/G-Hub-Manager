@@ -1,4 +1,5 @@
 import Layout from '@/components/Layout/Layout';
+import Loading from '@/components/Loading/Loading';
 import client from '@/utilities/ApolloClientConnection/ApolloClientConnection';
 import { gql, useQuery } from '@apollo/client';
 import Link from 'next/link';
@@ -33,7 +34,7 @@ const RepoDetails: React.FC = () => {
   }
 
   if (loading) {
-    return <p>loading</p>;
+    return <Loading />;
   }
 
   const { name, url, isPrivate, sshUrl, createdAt, description, homepageUrl } =
