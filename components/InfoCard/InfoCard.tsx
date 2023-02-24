@@ -5,7 +5,7 @@ interface INFOPROPS {
   cardData: {
     name: string;
     value: number | string;
-    icon: JSX.Element[] | JSX.Element;
+    icon: React.ReactNode;
   };
 }
 

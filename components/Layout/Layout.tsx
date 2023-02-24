@@ -6,7 +6,7 @@ import { BsGithub } from 'react-icons/bs';
 import Profile from '../SideBarProfile/Profile';
 
 interface LPROPS {
-  children: JSX.Element[] | JSX.Element;
+  children: React.ReactNode;
 }
 
 const Layout: React.FC<LPROPS> = ({ children }) => {
