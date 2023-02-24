@@ -2,7 +2,6 @@ import React from 'react';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import Layout from '@/components/Layout/Layout';
 import { BsFillPencilFill } from 'react-icons/bs';
-import StatusModal from '@/components/StatusModal/StatusModal';
 import UpDateStatus from '@/components/UpDateStatus/UpDateStatus';
 import CreateRepo from '@/components/CreateRepo/CreateRepo';
 

@@ -13,7 +13,7 @@ const CREATE_REOP = gql`
   }
 `;
 
-const CreateRepo = () => {
+const CreateRepo: React.FC = () => {
   const [repoName, setRepoName] = useState('');
   const [privacy, setPrivacy] = useState('PUBLIC');
 
