@@ -6,21 +6,21 @@ import { gql } from '@apollo/client';
 import { useState } from 'react';
 
 interface RPOPROPS {
-  data: [
-    {
-      node: {
-        name: string;
-        url: string;
-        homepageUrl?: string;
-        description?: string;
-      };
-    }
-  ];
+  data: {
+    user: {
+      repositories: { edges: [] };
+      avatarUrl: string;
+      name: string;
+      login: string;
+    };
+  };
 }
 
 const Repositories: React.FC<RPOPROPS> = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [size, setSize] = useState(8);
+
+  console.log(data, ' repo');
 
   const repos = data?.user?.repositories?.edges;
 
@@ -35,7 +35,6 @@ const Repositories: React.FC<RPOPROPS> = ({ data }) => {
     name: data?.user?.login,
     avatarUrl: data?.user?.avatarUrl,
   };
-
   return (
     <Layout>
       <section className="px-8 py-8 space-y-10">
@@ -60,13 +59,24 @@ const Repositories: React.FC<RPOPROPS> = ({ data }) => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-          {pagedData?.map((repo) => (
-            <PinnedRepoCard
-              key={repo.node.id}
-              data={repo.node}
-              profileData={profileData}
-            />
-          ))}
+          {pagedData?.map(
+            (repo: {
+              node: {
+                id?: string | undefined;
+                url?: string | undefined;
+                name: string;
+                homepageUrl?: string | undefined;
+                description?: string | undefined;
+                createdAt: string;
+              };
+            }) => (
+              <PinnedRepoCard
+                key={repo.node.id}
+                data={repo.node}
+                profileData={profileData}
+              />
+            )
+          )}
         </div>
         <div className=" flex justify-center pb-9">
           {pages &&

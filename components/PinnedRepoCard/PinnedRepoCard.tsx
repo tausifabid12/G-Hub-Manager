@@ -5,12 +5,16 @@ import { BsCodeSlash } from 'react-icons/bs';
 
 interface IPROPS {
   data: {
-    id: string;
+    id?: string;
     url?: string;
     name: string;
     homepageUrl?: string;
     description?: string;
     createdAt: string;
+  };
+  profileData: {
+    name: string;
+    avatarUrl: string;
   };
 }
 

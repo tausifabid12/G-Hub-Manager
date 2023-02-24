@@ -46,13 +46,24 @@ const PinnedRepo: React.FC = () => {
       <h1 className="text-4xl font-bold text-secondary pb-8">Pinned Repos</h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5 gap-y-8">
         {pinnedRepos &&
-          pinnedRepos.map((repo) => (
-            <PinnedRepoCard
-              key={repo.node.id}
-              data={repo.node}
-              profileData={profileData}
-            />
-          ))}
+          pinnedRepos.map(
+            (repo: {
+              node: {
+                id?: string | undefined;
+                url?: string | undefined;
+                name: string;
+                homepageUrl?: string | undefined;
+                description?: string | undefined;
+                createdAt: string;
+              };
+            }) => (
+              <PinnedRepoCard
+                key={repo.node.id}
+                data={repo.node}
+                profileData={profileData}
+              />
+            )
+          )}
       </div>
     </section>
   );
