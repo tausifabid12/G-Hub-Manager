@@ -41,7 +41,7 @@ const RepoDetails: React.FC = () => {
 
   return (
     <Layout>
-      <section className="rounded-xl bg-white p-4 ring mx-20 my-16 ring-indigo-50 sm:p-6 lg:p-8">
+      <section className="rounded-xl bg-white p-4 ring lg:mx-20 mx-2 my-16 ring-indigo-50 sm:p-6 lg:p-8">
         <div className="flex items-start sm:gap-8 ">
           <div
             className="hidden sm:grid sm:h-20 sm:w-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-primary"
@@ -81,7 +81,7 @@ const RepoDetails: React.FC = () => {
                 &middot;
               </span>
             </div>
-            <strong className="absolute right-5 rounded border border-primary bg-primary px-3 py-1.5 text-xs text-white ">
+            <strong className="hidden lg:absolute right-5 rounded border border-primary bg-primary px-3 py-1.5 text-xs text-white ">
               {isPrivate ? 'Private Repository' : 'Public Repository'}
             </strong>
 

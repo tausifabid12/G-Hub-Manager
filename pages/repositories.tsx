@@ -123,8 +123,6 @@ export async function getStaticProps() {
     `,
   });
 
-  console.log(data?.user?.repositories?.edges);
-
   return {
     props: { data: data },
   };

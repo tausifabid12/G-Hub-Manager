@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { BsFillXCircleFill } from 'react-icons/bs';
 import PinnedRepoCard from '../PinnedRepoCard/PinnedRepoCard';
+import Link from 'next/link';
 
 const GET_PROFILEINFO = gql`
   query getProfileINfo {
@@ -55,7 +56,7 @@ const Profile: React.FC = () => {
   return (
     <div>
       <div
-        className={`flex flex-wrap items-center space-x-7 w-full  ${
+        className={`hidden  lg:flex flex-wrap items-center space-x-7 w-full  ${
           isSearch ? 'p-0' : 'p-10'
         } shadow-sm text-gray-100 `}
       >
@@ -64,7 +65,7 @@ const Profile: React.FC = () => {
           height={500}
           src={data?.user.avatarUrl}
           alt=""
-          className="w-24 h-24 rounded-full bg-gray-500 aspect-square mx-auto lg:mx-0"
+          className="w-16 h-16   lg:w-24 lg:h-24 rounded-full bg-gray-500 aspect-square mx-auto lg:mx-0"
         />
         <div className="space-y-4 mt-4 flex-grow lg:mt-0 text-center text-secondary mx-auto lg:mx-0 relative">
           <div className="flex items-center justify-between w-full  ">
