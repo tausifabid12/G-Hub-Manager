@@ -1,9 +1,12 @@
 import Layout from '@/components/Layout/Layout';
+import Loading from '@/components/Loading/Loading';
 import PinnedRepoCard from '@/components/PinnedRepoCard/PinnedRepoCard';
 import RepositoriesCard from '@/components/RepositoriesCard/RepositoriesCard';
+import { useAuth } from '@/contexts/AuthProvider';
 import client from '@/utilities/ApolloClientConnection/ApolloClientConnection';
 import { gql } from '@apollo/client';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 
 interface RPOPROPS {
   data: {
@@ -20,7 +23,21 @@ const Repositories: React.FC<RPOPROPS> = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [size, setSize] = useState(8);
 
-  console.log(data, ' repo');
+  const router = useRouter();
+  const { user, loading } = useAuth();
+
+  useEffect(() => {
+    if (!user) {
+      router.push('/login');
+    }
+  }, [user, router]);
+
+  if (loading) {
+    return <Loading />;
+  }
+  if (!user) {
+    return null;
+  }
 
   const repos = data?.user?.repositories?.edges;
 

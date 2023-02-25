@@ -1,8 +1,8 @@
 import Layout from '@/components/Layout/Layout';
 import Loading from '@/components/Loading/Loading';
-import client from '@/utilities/ApolloClientConnection/ApolloClientConnection';
+import { useAuth } from '@/contexts/AuthProvider';
 import { gql, useQuery } from '@apollo/client';
-import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -25,15 +25,27 @@ const RepoDetails: React.FC = () => {
   const { query } = useRouter();
   const repoName = query.repoDetails;
 
-  const { loading, error, data } = useQuery(GET_REPOSITORY, {
+  const { loading: dataLoading, data } = useQuery(GET_REPOSITORY, {
     variables: { repoName },
   });
 
-  if (error) {
-    console.log(error);
-  }
+  const router = useRouter();
+  const { user, loading } = useAuth();
+
+  useEffect(() => {
+    if (!user) {
+      router.push('/login');
+    }
+  }, [user, router]);
 
   if (loading) {
+    return <Loading />;
+  }
+  if (!user) {
+    return null;
+  }
+
+  if (dataLoading) {
     return <Loading />;
   }
 
