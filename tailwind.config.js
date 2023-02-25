@@ -29,7 +29,7 @@ module.exports = {
 
           info: '#7EBDF1',
 
-          success: '#58E997',
+          success: '#ffffff',
 
           warning: '#975107',
 

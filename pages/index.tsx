@@ -1,12 +1,13 @@
 import Head from 'next/head';
 import { gql } from '@apollo/client';
-
 import Layout from '@/components/Layout/Layout';
-import InfoCard from '@/components/InfoCard/InfoCard';
 import client from '@/utilities/ApolloClientConnection/ApolloClientConnection';
 import TopInfoSection from '@/components/TopInfoSection/TopInfoSection';
-import Profile from '@/components/SideBarProfile/Profile';
 import PinnedRepo from '@/components/PinnedRepos/PinnedRepo';
+import { useEffect, useState } from 'react';
+import { useAuth } from '@/contexts/AuthProvider';
+import { useRouter } from 'next/router';
+import Loading from '@/components/Loading/Loading';
 
 interface IPROPS {
   data: {
@@ -28,6 +29,22 @@ interface IPROPS {
 }
 
 const Home: React.FC<IPROPS> = ({ data }) => {
+  const router = useRouter();
+  const { user, loading } = useAuth();
+
+  useEffect(() => {
+    if (!user) {
+      router.push('/login');
+    }
+  }, [user, router]);
+
+  if (loading) {
+    return <Loading />;
+  }
+  if (!user) {
+    return null;
+  }
+
   return (
     <>
       <Head>
