@@ -52,6 +52,8 @@ const Repositories: React.FC<RPOPROPS> = ({ data }) => {
     name: data?.user?.login,
     avatarUrl: data?.user?.avatarUrl,
   };
+
+  // console.log(pages);
   return (
     <Layout>
       <section className="px-8 py-8 space-y-10">
@@ -96,16 +98,37 @@ const Repositories: React.FC<RPOPROPS> = ({ data }) => {
           )}
         </div>
         <div className=" flex justify-center pb-9">
+          {currentPage > 1 && (
+            <button
+              onClick={() => setCurrentPage(currentPage - 1)}
+              className="px-3 py-1 mr-3 text-secondary font-semibold shadow-lg border border-gray-200 rounded-lg"
+            >
+              Prev
+            </button>
+          )}
+
           {pages &&
             [...Array(pages).keys()].map((num) => (
               <button
                 onClick={() => setCurrentPage(num + 1)}
-                className="px-3 py-1 mr-3 text-secondary font-semibold shadow-lg border border-gray-200 rounded-lg"
+                className={`px-3 py-1 mr-3 ${
+                  currentPage === num + 1
+                    ? 'bg-primary text-white'
+                    : 'bg-white text-secondary'
+                }  font-semibold shadow-lg border border-gray-200 rounded-lg`}
                 key={num}
               >
                 {num + 1}
               </button>
             ))}
+          {currentPage < pages && (
+            <button
+              onClick={() => setCurrentPage(currentPage + 1)}
+              className="px-3 py-1 mr-3 text-secondary font-semibold shadow-lg border border-gray-200 rounded-lg"
+            >
+              Next
+            </button>
+          )}
         </div>
       </section>
     </Layout>
