@@ -31,10 +31,6 @@ const GET_REPOINFO = gql`
 const PinnedRepo: React.FC = () => {
   const { loading, error, data } = useQuery(GET_REPOINFO);
 
-  if (error) {
-    console.log(error);
-  }
-
   if (loading) {
     return <Loading />;
   }

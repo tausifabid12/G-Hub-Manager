@@ -25,7 +25,6 @@ const LogIn: React.FC = () => {
   } = useForm<fromData>();
 
   const handleLogin = (data: { email: string; password: string }) => {
-    console.log(data);
     setLoading(true);
     login(data.email, data.password)
       .then((result: { user: { uid: string } }) => {

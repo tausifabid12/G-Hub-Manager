@@ -39,10 +39,6 @@ const Profile: React.FC = () => {
     variables: { repoName: searchRepoName },
   });
 
-  if (error) {
-    console.log(error);
-  }
-
   // if (loading) {
   //   return <Loading />;
   // }

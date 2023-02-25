@@ -20,8 +20,6 @@ const CreateRepo: React.FC = () => {
   // Doing Mutation
   const [updateStatus, { data, loading, error }] = useMutation(CREATE_REOP);
 
-  console.log(data?.createRepository?.repository?.name);
-
   return (
     <section className="mx-10 my-8 h-full shadow-lg rounded-xl py-10 px-6 border-t-4 border-secondary space-y-5">
       <h1 className="text-3xl font-bold text-secondary mb-9">
