@@ -39,8 +39,10 @@ const UpDateStatus: React.FC = () => {
   } = useQuery(GET_PROFILEINFO);
 
   //
+  const updatedStatus = data?.changeUserStatus?.status?.message;
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: any): void => {
+    e.preventDefault();
     updateStatus({
       variables: {
         input: {
@@ -48,8 +50,12 @@ const UpDateStatus: React.FC = () => {
         },
       },
     });
-    refetch();
-    toast.success('Successfully Updated!');
+
+    if (loading || updatedStatus) {
+      refetch();
+
+      toast.success('Successfully Updated!');
+    }
   };
 
   return (
@@ -58,7 +64,12 @@ const UpDateStatus: React.FC = () => {
         <h1 className="text-3xl font-bold text-secondary">Update New Status</h1>
         <div className="flex items-center space-x-8">
           <p className="text-lg font-semibold">
-            Status: {statusData?.user?.status?.message}
+            Status:{' '}
+            {loading
+              ? 'Updating....'
+              : updatedStatus
+              ? updatedStatus
+              : statusData?.user?.status?.message}
           </p>
 
           <label
@@ -83,7 +94,7 @@ const UpDateStatus: React.FC = () => {
             </label>
             <div>
               <h1 className="text-2xl font-bold pb-5">Update Your Status</h1>
-              <div className="form-control space-y-4">
+              <form onSubmit={handleSubmit} className="form-control space-y-4">
                 <label className="label">
                   <span className="text-secondary font-semibold">
                     Write Your Status
@@ -94,14 +105,10 @@ const UpDateStatus: React.FC = () => {
                   className="textarea textarea-bordered h-24"
                   placeholder="Your Status..."
                 ></textarea>
-                <button
-                  onClick={handleSubmit}
-                  // htmlFor="StatusModal"
-                  className="btn btn-secondary text-white"
-                >
-                  submit
+                <button className="btn btn-secondary text-white">
+                  {loading ? 'Updating....' : 'Update'}
                 </button>
-              </div>
+              </form>
             </div>
           </div>
         </div>

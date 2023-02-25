@@ -27,10 +27,12 @@ const Repositories: React.FC<RPOPROPS> = ({ data }) => {
   const { user, loading } = useAuth();
 
   useEffect(() => {
-    if (!user) {
+    if (loading || user) {
+      console.log('logged In');
+    } else {
       router.push('/login');
     }
-  }, [user, router]);
+  }, [user, loading, router]);
 
   if (loading) {
     return <Loading />;
