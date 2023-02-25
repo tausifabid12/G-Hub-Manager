@@ -75,7 +75,7 @@ const SignUP: React.FC = () => {
 
       <div className="min-h-screen  py-6 flex flex-col justify-center sm:py-12">
         <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-primary shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
+          <div className="absolute inset-0 bg-transparent  lg:bg-gradient-to-r from-primary/30 to-primary lg:shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
           <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
             <div className="max-w-[400px] mx-auto">
               <div>
@@ -87,7 +87,7 @@ const SignUP: React.FC = () => {
                     <p className="text-sm text-gray-600 font-bold text-center">
                       Sign up to access your account
                     </p>
-                    <p className=" text-red-500 mt-5 text-center">
+                    <p className=" text-red-500 mt-1 text-center">
                       {error.slice(10, error.length)}
                     </p>
                   </div>
