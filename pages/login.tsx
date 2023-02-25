@@ -168,7 +168,7 @@ const LogIn: React.FC = () => {
                       Sign In With Google
                     </button>
                   </div>
-                  <p className="text-xs text-gray-600 font-semibold text-center mt-8">
+                  <p className="text-sm text-gray-600 font-semibold text-center mt-8">
                     {`  Don't `}Have an Account{' '}
                     <Link
                       href="/signup"
