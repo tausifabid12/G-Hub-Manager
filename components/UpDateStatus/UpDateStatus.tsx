@@ -60,7 +60,7 @@ const UpDateStatus: React.FC = () => {
 
   return (
     <section>
-      <div className="mx-10 my-8 h-full shadow-lg rounded-xl p-6 border-t-4 border-secondary space-y-5">
+      <div className="mx-4 lg:mx-10 my-8 h-full shadow-lg rounded-xl p-6 border-t-4 border-secondary space-y-5">
         <h1 className="text-3xl font-bold text-secondary">Update New Status</h1>
         <div className="flex items-center space-x-8">
           <p className="text-lg font-semibold">

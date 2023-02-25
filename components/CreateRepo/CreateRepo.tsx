@@ -37,7 +37,7 @@ const CreateRepo: React.FC = () => {
   const [updateStatus, { data, loading }] = useMutation(CREATE_REOP);
 
   return (
-    <section className="mx-10 my-8 h-full shadow-lg rounded-xl py-6 px-6 border-t-4 border-secondary space-y-5">
+    <section className="mx-4 lg:mx-10 my-8 h-full shadow-lg rounded-xl py-6 px-6 border-t-4 border-secondary space-y-5">
       <h1 className="text-3xl font-bold text-secondary mb-9">
         Create New Repository
       </h1>
