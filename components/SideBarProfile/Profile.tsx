@@ -126,6 +126,16 @@ const Profile: React.FC = () => {
                     className={`w-full mt-24 ${isSearch ? 'block' : 'hidden'}`}
                   >
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 w-[70%] mx-auto">
+                      <div
+                        className={`${
+                          searchLoading ? 'flex' : 'hidden'
+                        } col-span-3  justify-center items-center h-32`}
+                      >
+                        <h1 className="text-primary font-bold text-2xl">
+                          Loading.........
+                        </h1>
+                      </div>
+
                       {searchData?.search?.edges &&
                         searchData?.search?.edges.map((item: any) => (
                           <SearchCard
