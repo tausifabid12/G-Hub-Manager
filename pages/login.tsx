@@ -7,6 +7,11 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { BsGithub } from 'react-icons/bs';
 
+type fromData = {
+  email: string;
+  password: string;
+};
+
 const LogIn: React.FC = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -17,7 +22,7 @@ const LogIn: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<fromData>();
 
   const handleLogin = (data: { email: string; password: string }) => {
     setLoading(true);
