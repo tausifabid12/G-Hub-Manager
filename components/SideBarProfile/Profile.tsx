@@ -6,6 +6,7 @@ import { BsFillXCircleFill } from 'react-icons/bs';
 import PinnedRepoCard from '../PinnedRepoCard/PinnedRepoCard';
 import Link from 'next/link';
 import Loading from '../Loading/Loading';
+import SearchCard from '../SearchCard/SearchCard';
 
 const GET_PROFILEINFO = gql`
   query getProfileINfo {
@@ -17,38 +18,52 @@ const GET_PROFILEINFO = gql`
   }
 `;
 
-const GET_REPOSITORY = gql`
-  query Repository($repoName: String!) {
-    repository(name: $repoName, owner: "tausifabid12") {
-      id
-      name
-      createdAt
-      description
-      homepageUrl
-      url
+const SEARCH_REPOSITORIES = gql`
+  query searchRepositories($query: String!, $first: Int!) {
+    search(query: $query, type: REPOSITORY, first: $first) {
+      edges {
+        node {
+          ... on Repository {
+            id
+            name
+            createdAt
+            description
+            homepageUrl
+            url
+          }
+        }
+      }
     }
   }
 `;
 
 const Profile: React.FC = () => {
   const [isSearch, setIsSearch] = useState(false);
-  const [searchRepoName, setSearchRepoName] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const { loading: searchLoading, data: searchData } = useQuery(
+    SEARCH_REPOSITORIES,
+    {
+      variables: { query: searchQuery, first: 4 },
+    }
+  );
 
   const { loading, error, data } = useQuery(GET_PROFILEINFO);
-  const { data: searchData } = useQuery(GET_REPOSITORY, {
-    variables: { repoName: searchRepoName },
-  });
 
-  // if (loading) {
-  //   return <Loading />;
-  // }
+  if (loading) {
+    return <Loading />;
+  }
 
   const profileData = {
     name: data?.user?.login,
     avatarUrl: data?.user?.avatarUrl,
   };
 
-  console.log(searchData?.repository);
+  console.log(searchData?.search?.edges, 'this is');
+
+  const handleSearch = (event: any) => {
+    event.preventDefault();
+    setSearchQuery(event.target.value);
+  };
 
   return (
     <div>
@@ -89,7 +104,7 @@ const Profile: React.FC = () => {
                 <div className="relative">
                   <input
                     onFocus={() => setIsSearch(true)}
-                    onChange={(e) => setSearchRepoName(e.target.value)}
+                    onChange={handleSearch}
                     type="text"
                     placeholder="Search by repository name.."
                     className={`input input-bordered  ${
@@ -110,13 +125,22 @@ const Profile: React.FC = () => {
                   <div
                     className={`w-full mt-24 ${isSearch ? 'block' : 'hidden'}`}
                   >
-                    <div className="mx-auto inline-block ">
-                      {searchData?.repository && (
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 w-[70%] mx-auto">
+                      {searchData?.search?.edges &&
+                        searchData?.search?.edges.map((item: any) => (
+                          <SearchCard
+                            key={item?.node?.id}
+                            data={item?.node}
+                            profileData={profileData}
+                          />
+                        ))}
+
+                      {/* {searchData?.search?.edges && (
                         <PinnedRepoCard
                           data={searchData?.repository}
                           profileData={profileData}
                         />
-                      )}
+                      )} */}
                     </div>
                   </div>
                 </div>

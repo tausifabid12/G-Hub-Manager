@@ -22,7 +22,7 @@ const PinnedRepoCard: React.FC<IPROPS> = ({ data, profileData }) => {
   const { url, name, id, homepageUrl, description, createdAt } = data;
 
   return (
-    <div className="max-w-2xl px-8 py-4 bg-white border-t-4 border-secondary rounded-lg shadow-lg dark:bg-gray-800">
+    <div className="w-full max-w-2xl px-8 py-4 bg-white border-t-4 border-secondary rounded-lg shadow-lg dark:bg-gray-800">
       <div className="flex items-center justify-between">
         <span className="text-sm  text-gray-600 font-semibold dark:text-gray-400">
           {createdAt.slice(0, 10)}
