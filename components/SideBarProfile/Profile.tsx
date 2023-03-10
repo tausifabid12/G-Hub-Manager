@@ -144,13 +144,6 @@ const Profile: React.FC = () => {
                             profileData={profileData}
                           />
                         ))}
-
-                      {/* {searchData?.search?.edges && (
-                        <PinnedRepoCard
-                          data={searchData?.repository}
-                          profileData={profileData}
-                        />
-                      )} */}
                     </div>
                   </div>
                 </div>
